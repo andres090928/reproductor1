@@ -497,7 +497,8 @@ a{
 }
 /* Estilo para dispositivos móviles */
 /* Estilo para dispositivos con un ancho máximo de 430px */
-@media (max-width: 430px) {
+/* Estilo para dispositivos con un ancho máximo de 720px */
+@media (max-width: 720px) {
     body {
         overflow-x: hidden; /* Evita el desplazamiento horizontal */
     }
@@ -514,8 +515,8 @@ a{
     }
 
     #player-img {
-        width: 100%;
-        max-width: 120px; /* Tamaño máximo de la imagen */
+        width: 80%; /* Ajusta el tamaño de la imagen */
+        max-width: 150px; /* Tamaño máximo de la imagen */
         height: auto;
     }
 
@@ -527,10 +528,12 @@ a{
     .volume-container {
         display: flex;
         justify-content: center;
+        align-items: center;
+        margin-top: 10px;
     }
 
     .volume-slider {
-        width: 70%; /* Ajustar el ancho del control de volumen */
+        width: 60%; /* Ajustar el ancho del control de volumen */
     }
 
     .controls button, .volume-container button {
@@ -541,9 +544,15 @@ a{
         display: flex;
         justify-content: space-around;
         padding: 10px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa;
+        border-top: 1px solid #e9ecef;
     }
 
     .floating-bar a, .floating-bar button {
-        font-size: 1.5rem; /* Ajustar el tamaño de los iconos en la barra flotante */
+        font-size: 1.2rem; /* Ajustar el tamaño de los iconos en la barra flotante */
     }
 }
+
