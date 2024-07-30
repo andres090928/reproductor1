@@ -1,0 +1,565 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Noto+Sans+SC:wght@100..900&display=swap');
+
+/* Resetear estilos por defecto y configuraciones generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans SC", sans-serif;
+}
+
+
+#container {
+   
+    margin: 0 auto;
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    background: #181818;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+} 
+
+/* Estilos específicos para elementos dentro de la lista de reproducción */
+
+
+h1{
+    padding: 10px;
+    font-size: 20px;
+    color: #fff;
+}
+/* ---------------ESTILOS PARA BOTONES  ---------------------*/
+
+#top-buttons {
+    position: relative;
+    width: 100%;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.top-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 25%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+}
+
+.top-button.exit {
+    background-color: #000000; /* Rojo para salir */
+}
+
+.top-button.heart {
+    background-color: #ff6c02; /* Verde para corazón */
+}
+
+/* Estilo para el ícono cuando está en estado activo (favorito) */
+.top-button.heart.active i {
+    font-size: 18px;
+    color: #000; /* Cambia el color a negro */
+    
+}
+
+
+/* ---------------ESTILOS PARA CARRUSEL  ---------------------*/
+
+.carousel {
+    max-width: 430px;
+    max-height: 932px;
+    margin: 0 auto 15px; /* Centra el carrusel y agrega espacio inferior */
+}
+
+.carousel img {
+    width: 100%;
+    height: 200px; /* Ajusta la altura según tu preferencia */
+    object-fit: cover; /* Esto se asegura de que la imagen cubra el contenedor sin distorsión */
+    border-radius: 15px; /* Añade bordes redondeados */
+}
+
+
+
+
+/* ------------------------------------------ */
+
+.filtros{
+    padding-left: 75px;
+    
+    padding-bottom: 10px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    background: transparent;
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+
+.filtros button{
+    background: transparent;
+    padding: 8px 8px;
+    width: 25%;
+    border-radius: 8px;
+    border-color: transparent;
+    color: #fff;
+    
+}
+
+.filtros button.active{
+    background: #ff6c02;
+    font-weight: 600;
+}
+
+/* -----------------------ESTILO PARA CANCIONES----------------------------- */
+.song {
+    display: flex;
+    align-items: center;
+    padding: 6px ;
+    background: none;
+    
+   
+}
+
+.song img {
+    width: 60px;
+    height: 60px;
+    border-radius: 22%;
+    margin-right: 10px;
+}
+
+.song p {
+    margin: 0;
+    font-weight: bold;
+    flex-grow: 1;
+    color: #fff;
+    font-size: 15px;
+}
+
+.options {
+    font-size: 22px;
+    cursor: pointer;
+    align-self: flex-start;
+    color: #ff6c02;
+
+}
+
+/* ------------ESTILOS PARA BARRA INFERIOR--------------------------- */
+/* Barra flotante inferior */
+
+.floating-bar-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background:rgb(0 0 0 / 94%); /* Fondo semitransparente */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque en el fondo */
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+.floating-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 250px; /* Ajusta el ancho de la barra según el diseño */
+}
+
+.floating-bar button {
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 24px;
+    transition: background-color 0.3s, color 0.3s;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.circulo{
+    background: #ff6c02 !important;
+}
+
+.floating-bar .btn.home {
+    position: absolute;
+    left: 100px; /* Ajusta la distancia del borde izquierdo */
+}
+
+.floating-bar .btn.profile {
+    position: absolute;
+    right: 10px; /* Ajusta la distancia del borde derecho */
+}
+
+
+
+
+
+
+
+
+
+/* ------------------------------------------- */
+/*              ESTILOS CANCION               */
+/* ------------------------------------------ */
+
+
+body {
+    background-color: #181818;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    position: relative;
+}
+
+#conteiner {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 430px;
+    min-height: 100vh;
+    padding: 20px;
+    padding-top: 100px;
+    
+}
+
+.botonnaran {
+    position: absolute;
+    right: 12px;
+    top: 10px;
+    background-color: #ff6c02; 
+    box-shadow: -6px -4px 10px 2px #ff6c0259;
+    height: 50px;
+    width: 50px;
+}
+
+.top-button.botonnaran.active i {
+    font-size: 18px;
+    color: #000; /* Cambia el color a negro */
+    
+}
+
+.botonnegro{
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    background-color: #0c0c0c; 
+    box-shadow:  -6px -4px 10px rgba(128, 128, 128, 0.509);
+    width: 55px;
+    height: 55px;
+}
+
+
+
+#player {
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50px;
+}
+
+#player h1{
+    font-size: 25px;
+    color: #bbb;
+    padding-bottom: 60px;
+}
+
+#player-img {
+    border-radius: 50px;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 4px solid rgb(26, 24, 24);
+    box-shadow:-6px -4px 13px 4px rgba(128, 128, 128, 0.509);
+}
+
+#player-title {
+    color: #fff;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+#player-artist {
+    color: #bbb;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+
+audio {
+    width: 100%;
+    margin-top: 20px;
+    display: none;
+}
+.audio-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play-pause{
+    background: #ff6c02;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 30px;
+    cursor: pointer;
+    
+}
+.controls button {
+    background:transparent;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.controls button:hover {
+    background: #ff6c02;
+}
+
+ /* Estilos para el tiempo */
+ .time-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.time-container span {
+    font-size: 14px;
+    color: #ffffff; /* Color blanco por defecto */
+    margin: 0 5px;
+}
+
+
+.time-container .duration {
+    color: #FF5722; /* Naranja para la duración total */
+}
+
+
+.progress {
+    width: 100%;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 35px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background: #ff6c02;
+}
+
+.controls button {
+    margin: 0 5px;
+}
+
+.player-controls {
+    text-align: center;
+}
+.volume-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.volume-container button {
+    margin: 0 10px;
+}
+
+.volume-slider {
+    width: 100px;
+    margin: 0 10px;
+}
+
+
+/* ---------------------------------
+---------------- FIN ---------------
+------------------------------------ */
+
+
+/* ---------------Andres------------ */
+
+.top-button.salir {
+    background-color: transparent; /* Rojo para salir */
+}
+
+.top-button.corazon {
+    background-color: transparent; /* Verde para corazón */
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+
+.top-button.corazon.active i {
+    font-size: 30px;
+    color: #ff0000; /* Cambia el color a negro */
+    
+}
+
+
+/* --------Camila--------- */
+
+.time-container {
+    display: flex;
+    justify-content: center;
+    margin-right: 240px;
+    margin-top: 10px;
+}
+
+.time-container span {
+    font-size: 14px;
+    color: #ffffff; /* Color blanco por defecto */
+    margin: 0 5px;
+}
+
+.time-container .current-time {
+    color: #ffffff; /* Verde para el tiempo actual */
+}
+
+.time-container .duration {
+    color: #ffffff; /* Naranja para la duración total */
+}
+
+/* ----------ESTILO PARA VOLUMEN--------- */
+
+.volume-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.volume-container button {
+    margin: 0 10px;
+    background: transparent;
+    border: none;
+}
+
+
+.icon{
+    font-size: 28px;
+    color: #fff;
+}
+
+.volume-slider {
+    width: 100px;
+    margin: 0 10px;
+    
+}
+
+#next{
+    font-size: 18px;
+}
+
+#shuffle{
+    font-size: 15px;
+}
+
+#prev{
+    font-size: 18px;
+}
+
+#play-pause{
+    font-size: 20px;
+}
+
+#repeat{
+    font-size: 15px;
+
+}
+@media (max-width: 450px) {
+    #container, #conteiner {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    .top-button {
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .carousel img {
+        height: 150px;
+    }
+
+    .filtros {
+        padding-left: 50px;
+    }
+
+    .filtros button {
+        padding: 5px;
+        width: 22%;
+    }
+
+    .song img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .song p {
+        font-size: 14px;
+    }
+
+    .floating-bar {
+        width: 100%;
+    }
+
+    .floating-bar button {
+        font-size: 20px;
+        width: 40px;
+        height: 40px;
+    }
+
+    #player {
+        width: 100%;
+        padding: 15px;
+    }
+
+    #player-img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 15px;
+    }
+
+    .controls button {
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .volume-slider {
+        width: 80px;
+    }
+}

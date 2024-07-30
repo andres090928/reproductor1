@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section id="container">
+        <div id="player">
+            <h1>Reproduciendo..</h1>
+            <img id="player-img" src="" alt="Imagen de la Canción" class="img-fluid">
+            <h2 id="player-title">Título de la Canción</h2>
+            <h3 id="player-artist">Artista</h3>
+            <div class="player-controls">
+                <audio id="audio" src=""></audio>
+                <div class="progress-container">
+                    <div class="progress" id="progress-bar">
+                        <div class="progress-bar" id="progress"></div>
+                    </div>
+                </div>
+                <!-- Tiempo de musica -->
+                <div class="time-container">
+                    <span id="current-time" class="current-time">00:00</span> / <span id="duration" class="duration">00:00</span>
+                </div>
+                <!-- Botones de reproduccion -->
+                <div class="controls">
+                    <button id="shuffle" class="btn btn-light">
+                        <i class="bi bi-shuffle"></i>
+                    </button>
+                    <button id="prev" class="btn btn-light">
+                        <i class="bi bi-skip-backward-fill"></i>
+                    </button>
+                    <button id="play-pause" class="btn btn-light">
+                        <i class="bi bi-play-fill"></i>
+                    </button>
+                    <button id="next" class="btn btn-light">
+                        <i class="bi bi-skip-forward-fill"></i>
+                    </button>
+                    <button id="repeat" class="btn btn-light">
+                        <i class="bi bi-arrow-repeat"></i>
+                    </button>
+                </div>
+                <div class="volume-container">
+                    <button id="volume-down" class="btn btn-light">
+                        <i class="bi bi-volume-down icon"></i>
+                    </button>
+                    <input type="range" id="volume-slider" class="volume-slider" min="0" max="1" step="0.01" value="1">
+                    <button id="volume-up" class="btn btn-light">
+                        <i class="bi bi-volume-up icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra inferior con iconos -->
+    <section class="floating-bar-container">
+        <div class="floating-bar">
+            <a href="lista_repro.html" class="top-button exit salir">
+                <i class="bi bi-box-arrow-left"></i>
+            </a>
+            <button class="btn btn-light rounded-circle text-white p-3 circulo">
+                <a href="index.html"><i class="bi bi-house-door"></i></a>
+            </button>
+            <a href="#" class="top-button heart corazon">
+                <i class="bi bi-heart"></i>
+            </a>
+        </div>
+    </section>
+
+    <script>
+        // Escucha el evento 'DOMContentLoaded' que se dispara cuando el contenido del DOM se ha cargado completamente
+document.addEventListener('DOMContentLoaded', function() {
+    // Recupera los datos de la canción seleccionada desde el almacenamiento local
+    const nombreCancion = localStorage.getItem('cancionSeleccionada');
+    const imagenCaratula = localStorage.getItem('imagenCaratula');
+    const nombreArtista = localStorage.getItem('nombreArtista');
+    const urlAudio = localStorage.getItem('urlAudio');
+
+    // Actualiza los elementos del DOM con la información de la canción seleccionada
+    document.getElementById('player-title').innerText = nombreCancion;
+    document.getElementById('player-artist').innerText = nombreArtista;
+    document.getElementById('player-img').src = imagenCaratula;
+    const audio = document.getElementById('audio');
+    audio.src = urlAudio;
+    audio.load();
+
+    // Añade evento al botón de reproducción/pausa
+    document.getElementById('play-pause').addEventListener('click', function() {
+        if (audio.paused) {
+            audio.play();
+            this.innerHTML = '<i class="bi bi-pause-fill"></i>'; // Cambia el icono a pausa
+        } else {
+            audio.pause();
+            this.innerHTML = '<i class="bi bi-play-fill"></i>'; // Cambia el icono a reproducir
+        }
+    });
+
+    // Añade evento al botón de siguiente canción
+    document.getElementById('next').addEventListener('click', function() {
+        pasarCancion();
+    });
+
+    // Añade evento al botón de canción anterior
+    document.getElementById('prev').addEventListener('click', function() {
+        volverCancion();
+    });
+
+    // Añade evento al control deslizante de volumen
+    document.getElementById('volume-slider').addEventListener('input', function() {
+        audio.volume = this.value;
+    });
+
+    // Añade evento al botón de subir volumen
+    document.getElementById('volume-up').addEventListener('click', function() {
+        const volumeSlider = document.getElementById('volume-slider');
+        volumeSlider.value = Math.min(1, parseFloat(volumeSlider.value) + 0.1); // Incrementa el volumen
+        audio.volume = volumeSlider.value;
+    });
+
+    // Añade evento al botón de bajar volumen
+    document.getElementById('volume-down').addEventListener('click', function() {
+        const volumeSlider = document.getElementById('volume-slider');
+        volumeSlider.value = Math.max(0, parseFloat(volumeSlider.value) - 0.1); // Decrementa el volumen
+        audio.volume = volumeSlider.value;
+    });
+
+    // Añade evento al botón de reproducción aleatoria
+    document.getElementById('shuffle').addEventListener('click', function() {
+        playlist.sort(() => Math.random() - 0.5); // Mezcla la lista de reproducción
+        actualizarReproductor();
+    });
+
+    // Añade evento al botón de repetición
+    document.getElementById('repeat').addEventListener('click', function() {
+        repeatMode = !repeatMode;
+        this.classList.toggle('active', repeatMode); // Alterna la clase 'active'
+        if (repeatMode) {
+            audio.addEventListener('ended', repetirCancion); // Añade el evento de repetición
+        } else {
+            audio.removeEventListener('ended', repetirCancion); // Elimina el evento de repetición
+        }
+    });
+
+    // Añade evento para actualizar la barra de progreso y los tiempos de la canción
+    audio.addEventListener('timeupdate', function() {
+        const progressBar = document.getElementById('progress');
+        const currentTime = formatTime(audio.currentTime);
+        const duration = formatTime(audio.duration);
+        progressBar.style.width = (audio.currentTime / audio.duration) * 100 + '%'; // Actualiza la barra de progreso
+        document.getElementById('current-time').innerText = currentTime; // Muestra el tiempo actual
+        document.getElementById('duration').innerText = duration; // Muestra la duración total
+    });
+
+    // Añade evento para permitir clics en la barra de progreso
+    document.getElementById('progress-bar').addEventListener('click', function(e) {
+        const barra = this;
+        const newTime = (e.offsetX / barra.offsetWidth) * audio.duration;
+        audio.currentTime = newTime; // Actualiza el tiempo actual del audio
+    });
+});
+
+    // Función para formatear el tiempo en minutos y segundos
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    let currentIndex = 0; // Índice de la canción actual
+    let repeatMode = false; // Modo de repetición desactivado por defecto
+    const playlist = [ // Lista de reproducción
+        {nombre: 'No Volvera', imagen: 'img/cancion1.jpeg', artista: 'Cris Valencia', audio: 'audio/cancion1.mp3'},
+        {nombre: 'Followers', imagen: 'img/cancion2.jpeg', artista: 'Pirlo', audio: 'audio/cancion2.mp3'},
+        {nombre: 'Ni Parientes...', imagen: 'img/cancion3.jpeg', artista: 'Los Tigres Del Norte', audio: 'audio/cancion3.mp3'},
+        {nombre: 'La Mesa Del Rincón', imagen: 'img/cancion4.jpeg', artista: 'Los Tigres Del Norte', audio: 'audio/cancion4.mp3'},
+        {nombre: 'Me Hace Daño Verte', imagen: 'img/cancion5.jpeg', artista: 'Fresto', audio: 'audio/cancion5.mp3'},
+        {nombre: 'Ella y Yo', imagen: 'img/cancion6.jpeg', artista: 'Don Omar', audio: 'audio/cancion6.mp3'},
+        {nombre: 'La Tanguita Roja', imagen: 'img/cancion7.jpeg', artista: 'Oro Solido', audio: 'audio/cancion7.mp3'},
+        {nombre: 'Buscaré Otro Amor', imagen: 'img/cancion8.jpeg', artista: 'Los Inquietos', audio: 'audio/cancion8.mp3'},
+        {nombre: 'Propuesta Indecente', imagen: 'img/cancion11.jpg', artista: 'Romeo Santos', audio: 'audio/cancion10.mp3'},
+        {nombre: 'Dile al Amor', imagen: 'img/cancion12.jpeg', artista: 'Aventura', audio: 'audio/cancion15.mp3'},
+        {nombre: 'Llévame Contigo', imagen: 'img/cancion13.jpg', artista: 'Romeo Santos', audio: 'audio/cancion13.mp3'},
+        {nombre: 'Pronto Llegará', imagen: 'img/cancion14.jpg', artista: 'Hector Lavoe', audio: 'audio/cancion14.mp3'},
+        {nombre: 'Gotas de Lluvia', imagen: 'img/cancion15.jpeg', artista: 'Grupo Niche', audio: 'audio/cancion15.mp3'},
+    ];
+
+    // Función para pasar a la siguiente canción
+    function pasarCancion() {
+        currentIndex = (currentIndex + 1) % playlist.length; // Avanza al siguiente índice, vuelve al inicio si llega al final
+        actualizarReproductor();
+    }
+
+    // Función para volver a la canción anterior
+    function volverCancion() {
+        currentIndex = (currentIndex - 1 + playlist.length) % playlist.length; // Retrocede al índice anterior, vuelve al final si llega al inicio
+        actualizarReproductor();
+    }
+
+    // Función para repetir la canción actual
+    function repetirCancion() {
+        audio.currentTime = 0; // Reinicia el tiempo actual del audio
+        audio.play(); // Reproduce la canción nuevamente
+    }
+
+    // Función para actualizar la información del reproductor
+    function actualizarReproductor() {
+        const { nombre, imagen, artista, audio: srcAudio } = playlist[currentIndex];
+        document.getElementById('player-title').innerText = nombre;
+        document.getElementById('player-artist').innerText = artista;
+        document.getElementById('player-img').src = imagen;
+        const audioElement = document.getElementById('audio');
+        audioElement.src = srcAudio;
+        audioElement.load();
+        audioElement.play();
+    }
+
+    // Evento 'DOMContentLoaded' para añadir funcionalidad al botón de corazón
+    document.addEventListener('DOMContentLoaded', function() {
+        const heartButton = document.querySelector('.top-button.heart');
+
+        heartButton.addEventListener('click', function(event) {
+            event.preventDefault(); // Evita que el enlace realice alguna acción
+
+            // Alterna la clase 'active' en el botón
+            this.classList.toggle('active');
+        });
+    });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
