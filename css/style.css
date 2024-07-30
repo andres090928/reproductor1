@@ -495,71 +495,49 @@ a{
     font-size: 15px;
 
 }
-@media (max-width: 450px) {
-    #container, #conteiner {
+@media (max-width: 768px) {
+    #container {
         padding: 10px;
     }
 
-    h1 {
-        font-size: 18px;
-        padding: 8px;
-    }
-
-    .top-button {
-        width: 35px;
-        height: 35px;
-        font-size: 20px;
-    }
-
-    .carousel img {
-        height: 150px;
-    }
-
-    .filtros {
-        padding-left: 50px;
-    }
-
-    .filtros button {
-        padding: 5px;
-        width: 22%;
-    }
-
-    .song img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .song p {
-        font-size: 14px;
-    }
-
-    .floating-bar {
-        width: 100%;
-    }
-
-    .floating-bar button {
-        font-size: 20px;
-        width: 40px;
-        height: 40px;
-    }
-
     #player {
-        width: 100%;
-        padding: 15px;
+        padding: 10px;
+    }
+
+    #player h1 {
+        font-size: 20px;
+        padding-bottom: 15px;
     }
 
     #player-img {
         width: 100%;
-        height: auto;
-        margin-bottom: 15px;
+        max-width: 200px;
     }
 
     .controls button {
         padding: 5px 10px;
-        font-size: 14px;
+        margin: 0 2px;
+    }
+
+    .time-container {
+        padding-bottom: 15px;
+    }
+
+    .volume-container {
+        flex-direction: column;
+        margin-top: 5px;
     }
 
     .volume-slider {
-        width: 80px;
+        width: 80%;
+    }
+
+    .floating-bar {
+        width: 200px;
+    }
+
+    .floating-bar button {
+        width: 40px;
+        height: 40px;
     }
 }
