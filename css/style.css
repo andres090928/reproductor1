@@ -499,60 +499,11 @@ a{
 /* Estilo para dispositivos con un ancho máximo de 430px */
 /* Estilo para dispositivos con un ancho máximo de 720px */
 @media (max-width: 720px) {
-    body {
-        overflow-x: hidden; /* Evita el desplazamiento horizontal */
-    }
-
-    #container {
-        max-width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-    }
-
-    #player {
-        text-align: center;
-        max-width: 100%;
-    }
-
     #player-img {
         width: 80%; /* Ajusta el tamaño de la imagen */
         max-width: 150px; /* Tamaño máximo de la imagen */
         height: auto;
-    }
-
-    .player-controls {
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
-    .volume-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10px;
-    }
-
-    .volume-slider {
-        width: 60%; /* Ajustar el ancho del control de volumen */
-    }
-
-    .controls button, .volume-container button {
-        font-size: 1rem; /* Ajustar el tamaño de los botones */
-    }
-
-    .floating-bar {
-        display: flex;
-        justify-content: space-around;
-        padding: 10px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        background-color: #000000;
-        border-top: 1px solid #e9ecef;
-    }
 }
-    .floating-bar a, .floating-bar button {
-        font-size: 1.2rem; /* Ajustar el tamaño de los iconos en la barra flotante */
-    }
-}
+
+
 
