@@ -495,9 +495,9 @@ a{
     font-size: 15px;
 
 }
-@media (max-width: 768px) {
+@media (max-width: 450px) {
     #player-img {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
     }
 }
