@@ -496,48 +496,8 @@ a{
 
 }
 @media (max-width: 768px) {
-    #container {
-        padding: 10px;
-    }
-
-    #player {
-        padding: 10px;
-    }
-
-    #player h1 {
-        font-size: 20px;
-        padding-bottom: 15px;
-    }
-
     #player-img {
-        width: 100%;
-        max-width: 200px;
-    }
-
-    .controls button {
-        padding: 5px 10px;
-        margin: 0 2px;
-    }
-
-    .time-container {
-        padding-bottom: 15px;
-    }
-
-    .volume-container {
-        flex-direction: column;
-        margin-top: 5px;
-    }
-
-    .volume-slider {
-        width: 80%;
-    }
-
-    .floating-bar {
-        width: 200px;
-    }
-
-    .floating-bar button {
-        width: 40px;
-        height: 40px;
+        width: 150px;
+        height: 150px;
     }
 }
