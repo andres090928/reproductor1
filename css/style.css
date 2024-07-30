@@ -540,19 +540,17 @@ a{
         font-size: 1rem; /* Ajustar el tamaño de los botones */
     }
 
-    .floating-bar-container {
+    .floating-bar {
+        display: flex;
+        justify-content: space-around;
+        padding: 10px;
         position: fixed;
         bottom: 0;
-        left: 0;
         width: 100%;
-        background: rgb(0 0 0 / 94%); /* Fondo semitransparente */
-        backdrop-filter: blur(10px); /* Efecto de desenfoque en el fondo */
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
-        border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+        background-color: #000000;
+        border-top: 1px solid #e9ecef;
     }
+}
     .floating-bar a, .floating-bar button {
         font-size: 1.2rem; /* Ajustar el tamaño de los iconos en la barra flotante */
     }
