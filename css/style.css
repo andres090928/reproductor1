@@ -495,15 +495,6 @@ a{
     font-size: 15px;
 
 }
-/* Estilo para dispositivos móviles */
-/* Estilo para dispositivos con un ancho máximo de 430px */
-/* Estilo para dispositivos con un ancho máximo de 720px */
-@media (max-width: 720px) {
-    #player-img {
-        width: 80%; /* Ajusta el tamaño de la imagen */
-        max-width: 150px; /* Tamaño máximo de la imagen */
-        height: auto;
-}
 
 
 
